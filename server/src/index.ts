@@ -5,6 +5,7 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import path from 'path';
+import router from './router';
 
 export default class Core {
     // define properties
@@ -47,11 +48,9 @@ export default class Core {
             this.app.use(morgan('dev'));
     }
 
+    // setup router and error handle
     setupRoutes() {
-        this.app.get('/', (req: Request, res: any, next: any) => {
-            console.log('ok');
-            res.end();
-        });
+        this.app.use(router);
     }
 
 };
