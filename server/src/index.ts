@@ -1,6 +1,6 @@
-import express from 'express';
+import bodyParser from 'body-parser';
 import { createServer } from 'http';
-import { NextFunction } from 'connect';
+import express from 'express';
 
 export default class Core {
     // define properties
@@ -14,6 +14,7 @@ export default class Core {
     // run all methods
     async start() {
         await this.setupExpress();
+        await this.configuration();
         await this.setupRoutes();
     }
 
@@ -23,8 +24,14 @@ export default class Core {
         server.listen(process.env.PORT || 3000, () => (console.log('server started...')));
     }
 
+    configuration() {
+        // body parser
+        this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({ extended: true }));
+    }
+
     setupRoutes() {
-        this.app.get('/', (req: Request, res: Response, next: NextFunction) => {
+        this.app.get('/', (req: Request, res: Response, next: any) => {
             console.log('ok');
         });
     }
