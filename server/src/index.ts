@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import { createServer } from 'http';
 import express from 'express';
+import helmet from 'helmet';
 import morgan from 'morgan';
 import path from 'path';
 
@@ -27,12 +28,15 @@ export default class Core {
     }
 
     configuration() {
-        // set static file url
-        this.app.use('/static', express.static(path.resolve('./', 'public')));
+        // helmet
+        this.app.use(helmet);
 
         // body parser
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: true }));
+
+        // set static file url
+        this.app.use('/static', express.static(path.resolve('./', 'public')));
 
         // morgan
         if(this.app.get('env'))
