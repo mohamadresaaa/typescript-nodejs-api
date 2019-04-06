@@ -1,0 +1,19 @@
+{
+  "name": "jraw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile-server": "tsc && node build",
+    "start": "nodemon -e ts -w ./ -x npm run compile-server"
+  },
+  "author": "Mohmadreza Mosalli",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.1",
+    "nodemon": "^1.18.10"
+  }
+}
