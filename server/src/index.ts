@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser';
 import { createServer } from 'http';
+import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -29,7 +30,10 @@ export default class Core {
 
     configuration() {
         // helmet
-        this.app.use(helmet);
+        this.app.use(helmet());
+
+        // cors
+        this.app.use(cors());
 
         // body parser
         this.app.use(bodyParser.json());
