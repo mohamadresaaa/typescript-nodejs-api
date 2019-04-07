@@ -11,7 +11,9 @@ export const contentType: RequestHandler = (req: Request, res: Response, next: N
 
 // set access control allow
 export const cors: RequestHandler = (req: Request, res: Response, next: NextFunction) => {
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.set({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
+    });
     next();
 };
