@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import path from 'path';
 import router from './router';
+import { apiErrorHandler, api404ErrorHandler } from './lib/errorHandling';
 
 export default class Core {
     // define properties
@@ -50,7 +51,9 @@ export default class Core {
 
     // setup router and error handle
     setupRoutes() {
-        this.app.use(router);
+        this.app.use('/api' ,router);
+        this.app.use('*', api404ErrorHandler);
+        this.app.use(apiErrorHandler);
     }
 
 };
