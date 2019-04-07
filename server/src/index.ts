@@ -1,13 +1,12 @@
 import bodyParser from 'body-parser';
 import { createServer } from 'http';
-import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import path from 'path';
 import router from './router';
 import { apiErrorHandler, api404ErrorHandler } from './lib/errorHandling';
-import { contentType } from './lib/express';
+import { contentType, cors } from './lib/express';
 
 export default class Core {
     // define properties
@@ -36,7 +35,10 @@ export default class Core {
         this.app.use(helmet());
 
         // cors
-        this.app.use(cors());
+        this.app.use(cors);
+
+        // accept application json
+        this.app.use(contentType);
 
         // body parser
         this.app.use(bodyParser.json());
@@ -52,9 +54,6 @@ export default class Core {
 
     // setup router and error handle
     setupRoutes() {
-        // accept application json
-        this.app.use(contentType);
-
         this.app.use('/api' ,router);
         this.app.use('*', api404ErrorHandler);
         this.app.use(apiErrorHandler);
