@@ -1,7 +1,7 @@
 import { ErrorRequestHandler } from 'express';
 import { PublicErrorMessage, ErrorMessage } from './messages';
 
-export const api404ErrorHandler: ErrorRequestHandler = (req, res, next: any) => {
+export const api404ErrorHandler: ErrorRequestHandler = (req: any, res: any, next: any) => {
     try {
         throw new PublicErrorMessage(new ErrorMessage('not found', 404));
     } catch (error) {
