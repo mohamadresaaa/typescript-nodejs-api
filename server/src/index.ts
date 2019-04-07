@@ -1,12 +1,12 @@
-import bodyParser from 'body-parser';
-import { createServer } from 'http';
-import express from 'express';
-import helmet from 'helmet';
-import morgan from 'morgan';
-import path from 'path';
-import router from './router';
-import { apiErrorHandler, api404ErrorHandler } from './lib/errorHandling';
-import { contentType, cors } from './lib/express';
+import bodyParser from "body-parser";
+import { createServer } from "http";
+import express from "express";
+import helmet from "helmet";
+import morgan from "morgan";
+import path from "path";
+import router from "./router";
+import { apiErrorHandler, api404ErrorHandler } from "./lib/errorHandling";
+import { contentType, cors } from "./lib/express";
 
 export default class Core {
     // define properties
@@ -27,7 +27,7 @@ export default class Core {
     // setup express server
     setupExpress() {
         let server = createServer(this.app);
-        server.listen(process.env.PORT || 3000, () => (console.log('server started...')));
+        server.listen(process.env.PORT || 3000, () => (console.log("server started...")));
     }
 
     configuration() {
@@ -45,17 +45,17 @@ export default class Core {
         this.app.use(bodyParser.urlencoded({ extended: true }));
 
         // set static file url
-        this.app.use('/static', express.static(path.resolve('./', 'public')));
+        this.app.use("/static", express.static(path.resolve("./", "public")));
 
         // morgan
-        if(this.app.get('env'))
-            this.app.use(morgan('dev'));
+        if(this.app.get("env"))
+            this.app.use(morgan("dev"));
     }
 
     // setup router and error handle
     setupRoutes() {
-        this.app.use('/api' ,router);
-        this.app.use('*', api404ErrorHandler);
+        this.app.use("/api" ,router);
+        this.app.use("*", api404ErrorHandler);
         this.app.use(apiErrorHandler);
     }
 

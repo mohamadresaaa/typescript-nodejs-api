@@ -3,7 +3,7 @@ import { PublicErrorMessage, ErrorMessage } from './messages';
 
 export const api404ErrorHandler: ErrorRequestHandler = (req: any, res: any, next: any) => {
     try {
-        throw new PublicErrorMessage(new ErrorMessage('not found', 404));
+        throw new PublicErrorMessage(ErrorMessage.errNotFound());
     } catch (error) {
         next(error);
     }
